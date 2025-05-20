@@ -42,8 +42,8 @@ find . -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
     yq e 'true' "$file" > /dev/null
 done
 
-mkdir /tmp/cache
-kubeconform_config="-strict -ignore-missing-schemas -cache /tmp/cache -schema-location /tmp/flux-crd-schemas -schema-location default -verbose"
+mkdir -p /tmp/cache/flux-validate-action
+kubeconform_config="-strict -ignore-missing-schemas -cache /tmp/cache/flux-validate-action -schema-location /tmp/flux-crd-schemas -schema-location default -verbose"
 
 echo "INFO - Validating clusters"
 find ./clusters -maxdepth 2 -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
